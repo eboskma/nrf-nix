@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     zephyr-sdk = {
-      url = "https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.15.2/zephyr-sdk-0.15.2_linux-x86_64.tar.gz";
+      url = "https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.0/zephyr-sdk-0.17.0_linux-x86_64.tar.xz";
       flake = false;
     };
   };
@@ -27,7 +27,7 @@
           zephyr-sdk = pkgs.stdenv.mkDerivation {
             name = "zephyr-sdk-patched";
             nativeBuildInputs = with pkgs; [ autoPatchelfHook ];
-            buildInputs = with pkgs; [ pkgs.stdenv.cc.cc.lib python38 ];
+            buildInputs = with pkgs; [ pkgs.stdenv.cc.cc.lib python310 libxcrypt-legacy ncurses ];
             installPhase = "ls -lah";
             src = inputs.zephyr-sdk;
             buildPhase = ''
